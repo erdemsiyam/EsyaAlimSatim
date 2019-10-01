@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Kullaniciİlanlari";
+    Layout = "~/Views/Shared/_indexLayout.cshtml";
+}
+@model AnaSayfaKullaniciİlanlari
+<div class="row">
+    <h2>Kullanici İlanlari</h2>
+    <h3><a href="/AnaSayfa/Kullaniciİlanlari/@Model.kullanici.id">@Model.kullanici.ad @Model.kullanici.soyad</a></h3>
+</div>
+
+<div class="row">
+    @if (Model.ilanlari != null)
+    {
+        foreach (ilan item in Model.ilanlari)
+        {
+            if (item.OneCikar != null && item.OneCikar.Count > 0 && item.OneCikar.FirstOrDefault().bitistarih > DateTime.Now)
+            {
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail" style="background-color:#66efaa">
+                        <a href="/AnaSayfa/İlanDetay/@item.id">
+                            <img src="~/Image/ilan/@item.ilanResim.OrderBy(x=>x.sirasi).FirstOrDefault().ad" alt="@item.baslik">
+                            <div class="caption">
+                                <h3>@item.baslik</h3>
+                                <h4>@item.fiyat</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <a href="/AnaSayfa/İlanDetay/@item.id">
+                            <img src="~/Image/ilan/@item.ilanResim.OrderBy(x=>x.sirasi).FirstOrDefault().ad" alt="@item.baslik">
+                            <div class="caption">
+                                <h3>@item.baslik</h3>
+                                <h4>@item.fiyat</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>

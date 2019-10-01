@@ -1,0 +1,129 @@
+﻿@model AlAbiVerAbi.ilan
+
+@{
+    ViewBag.Title = "İlan Detay";
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+
+<div>
+    <h4>ilan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AcikArtirma.id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AcikArtirma.id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategori.ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategori.ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kullanici.ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kullanici.ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.satildimi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.satildimi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ilanacikmi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ilanacikmi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ilantarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ilantarih)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.baslik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.baslik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aciklama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aciklama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sorunu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sorunu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kullanimsuresi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kullanimsuresi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.il)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.il)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ilce)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ilce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mahalle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mahalle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.konum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.konum)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "İlanDuzenle", new { id = Model.id }) |
+    @Html.ActionLink("İlanlar", "İlanlar")
+</p>

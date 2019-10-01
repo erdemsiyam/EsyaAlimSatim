@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @if (ViewBag.LoginTitle != null)
+    {
+        <title>@ViewBag.LoginTitle</title>
+    }
+    else
+    {
+        <title>Al Abi Ver Abi</title>
+    }
+    <link href="~/Content/Template/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/Template/bootstrap.min.js"></script>
+    <script src="~/Content/Template/jquery-3.3.1.min.js"></script>
+    <link href="~/Content/Login/main.css" rel="stylesheet" />
+    <script src="~/Content/Login/main.js"></script>
+</head>
+<body>
+    @RenderBody()
+    <script>
+        var alertDiv = $(".alert");
+        setTimeout(
+            function () {
+                alertDiv.remove();
+            }, 4000);
+    </script>
+</body>
+</html>

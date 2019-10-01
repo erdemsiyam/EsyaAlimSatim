@@ -1,0 +1,85 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_indexLayout.cshtml";
+}
+
+@model AnaSayfaIndexModel
+
+<div class="row">
+    <!--Filtrele,Sırala-->
+    @using (Html.BeginForm("Index", "AnaSayfa", FormMethod.Post, new { @class = "form-inline" }))
+    {
+    <div class="form-group" style="margin-right:15px;">
+        @Html.CheckBoxFor(x => x.arama.boolKategori, new { @class = "checkbox" })
+        @Html.DropDownListFor(x => x.arama.kategoriId, new SelectList(Model.kategoriler, "id", "ad"), "Kategori Seç", new { @class = "form-control" })
+
+    </div>
+
+        <div class="form-group" style="margin-right:15px;">
+            @Html.CheckBoxFor(x => x.arama.boolKelimeAra, new { @class = "checkbox" })
+            @Html.TextBoxFor(x => x.arama.kelimeAra, new { @class = "form-control", placeholder = "Kelime ile Ara", style = "width:120px;" })
+        </div>
+
+        <div class="form-group" style="margin-right:15px;">
+            @Html.CheckBoxFor(x => x.arama.boolEnAzFiyat, new { @class = "checkbox" })
+            @Html.TextBoxFor(x => x.arama.enAzFiyat, new { @class = "form-control", placeholder = "En Az Fiyat", type = "number", style = "width:120px;" })
+        </div>
+
+        <div class="form-group" style="margin-right:15px;">
+            @Html.CheckBoxFor(x => x.arama.boolEnFazlaFiyat, new { @class = "checkbox" })
+            @Html.TextBoxFor(x => x.arama.enfazlaFiyat, new { @class = "form-control", placeholder = "En Fazla Fiyat", type = "number" , style = "width:120px;" })
+        </div>
+
+        <div class="form-group" style="margin-right:15px;">
+            @Html.CheckBoxFor(x => x.arama.boolYayinTarihi, new { @class = "checkbox" })
+            @Html.DropDownListFor(x => x.arama.yayinTarihi, Model.arama.yayinTarihiList, "Yayın Tarihi Seç", new { @class = "form-control" }) @* ilk verilen parametre html element id'si Arama.cs'deki parametreyle aynı ad olmalı*@
+
+        </div>
+
+        <div class="form-group" style="margin-right:15px;">
+            @Html.CheckBoxFor(x => x.arama.boolSiralama, new { @class = "checkbox" })
+            @Html.DropDownListFor(x => x.arama.siralama, Model.arama.siralamaList, "Sıralama Seç", new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-default">UYGULA</button>
+    }
+
+</div>
+<br />
+<div class="row">
+    @if (Model.ilanlar != null)
+    {
+        foreach (ilan item in Model.ilanlar)
+        {
+            if (item.OneCikar.Count > 0 && item.OneCikar.OrderByDescending(x=>x.bitistarih).FirstOrDefault().bitistarih > DateTime.Now)
+            {
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail" style="background-color:#66efaa">
+                    <a href="/AnaSayfa/İlanDetay/@item.id">
+                        <img src="~/Image/ilan/@item.ilanResim.OrderBy(x=>x.sirasi).FirstOrDefault().ad" alt="@item.baslik">
+                        <div class="caption">
+                            <h3>@item.baslik</h3>
+                            <h4>@item.fiyat TL</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+        <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                <a href="/AnaSayfa/İlanDetay/@item.id">
+                    <img src="~/Image/ilan/@item.ilanResim.OrderBy(x=>x.sirasi).FirstOrDefault().ad" alt="@item.baslik">
+                    <div class="caption">
+                        <h3>@item.baslik</h3>
+                        <h4>@item.fiyat TL</h4>
+                    </div>
+                </a>
+            </div>
+        </div>
+            }
+        }
+    }
+
+</div>

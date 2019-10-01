@@ -1,0 +1,164 @@
+﻿@model IEnumerable<AlAbiVerAbi.ilan>
+
+@{
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+<div class="row"><div class="col-md-12 text-center"><h2><i>İlanlarım</i></h2></div></div>
+<br />
+<div class="row text-center">
+    <!--Açık Artırma Varsa -->
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">İlk Resim</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.baslik)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.kategori_id)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ilantarih)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.fiyat)</th>
+                <th scope="col">Favori Sayısı</th>
+                <th scope="col">İşlem</th>
+                <th scope="col">İşlem</th>
+                <th scope="col">Açık Artırma</th>
+                <th scope="col">Öne Çıkar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (ilan item in Model.OrderByDescending(x=>x.ilantarih).ToList()) // son ilan ilk gelir.
+            {
+            <tr>
+                <td><img src="~/Image/ilan/@item.ilanResim.OrderBy(x=>x.sirasi).FirstOrDefault().ad" alt="@item.baslik" width="100" height="100"/></td>
+                <td><a href="/Hesap/İlanDetay/@item.id">@Html.DisplayFor(modelItem => item.baslik)</a></td>
+                <td><a href="/AnaSayfa/KategoriGetir/@item.kategori_id"></a>@item.Kategori.ad</td>
+                <td>@item.ilantarih</td>
+                <td>@item.fiyat TL</td>
+                <td>
+                    @(item.Favoriilan.Count) 
+                </td>
+                <td>
+                    <a href="/Hesap/İlanDetay/@item.id" class="btn btn-success btn-xs" style="margin-bottom:8px;">İlan Detayı</a>
+                    <br />
+                    <a href="/Hesap/ilanDuzenle/@item.id" class="btn btn-warning btn-xs" style="margin-bottom:8px;">İlanı Düzenle</a>
+                    <br />
+                    <a href="/Hesap/İlanSil/@item.id" onclick="return confirm('Silmek istediğinizden emin misiniz ?')" class="btn btn-danger btn-xs" style="margin-bottom:8px;">İlanı Sil</a>
+                 
+                </td>
+                <td>
+                    @if ((bool)item.ilanacikmi)
+                    {
+                        <a href="/Hesap/İlanıGizle/@item.id" class="btn btn-danger btn-md" style="margin-bottom:14px;">İlanı Gizle</a>
+                    }
+                    else
+                    {
+                        <a href="/Hesap/İlanıAç/@item.id" class="btn btn-info btn-md" style="margin-bottom:14px;">İlanı Görünüme Aç</a>
+                    }
+                    <br />
+                    @if ((bool)item.satildimi)
+                    {
+                        using (Html.BeginForm("İlanSatildiGeriAl", "Hesap", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@item.id" />
+                            <button type="submit" class="btn btn-warning btn-md " style="margin-bottom:14px;">Tekrar Satışa Çıkar</button>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("İlanSatildi", "Hesap", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@item.id" />
+                            <button type="submit" class="btn btn-success btn-md " style="margin-bottom:14px;">İlanı Satıldı İşaretle</button>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (item.AcikArtirma != null)
+                    {
+                        using (Html.BeginForm("AcikArtirmaSil", "Hesap", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value="@item.id" />
+                            if (item.AcikArtirma.bitistarih < DateTime.Now)
+                            {
+                                <label>(Acik Artirma @((DateTime.Now - item.AcikArtirma.bitistarih).Value.Days) Gün Önce Bitti)</label>
+                            }
+                            else
+                            {
+                                <label>(Acik Artirma Bitmesine @((item.AcikArtirma.bitistarih - DateTime.Now).Value.Days) Gün Kaldı)</label>
+
+                            }
+                            <br />
+                            Teklif enYuksekTeklif = item.AcikArtirma.Teklif.OrderByDescending(x => x.teklif1).FirstOrDefault();
+                            if (enYuksekTeklif != null)
+                            {
+                                <label>@(item.AcikArtirma.Teklif.Count) Kişi Katıldı</label>
+                                <br />
+                                <label>En Yüksek Teklif @enYuksekTeklif.teklif1 TL </label>
+                                <br />
+                                if (item.AcikArtirma.bitistarih < DateTime.Now)
+                                {
+                                    <label>Kazanan : @(enYuksekTeklif.Kullanici.ad + " " + enYuksekTeklif.Kullanici.soyad)</label>
+                                    using (Html.BeginForm("AcikArtirmaKazananaMesajAt", "Hesap", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="ilan_id" value="@item.id" />
+                                        <input type="hidden" name="kazanan_id" value="@enYuksekTeklif.Kullanici.id" />
+                                        <button type="submit" class="btn btn-success btn-md ">Ona Bu Öğeyi Satmak İçin Mesaj At</button>
+                                    }
+                                }
+                                else
+                                {
+                                    <label>Yapan : @(enYuksekTeklif.Kullanici.ad + " " + enYuksekTeklif.Kullanici.soyad)</label>
+                                }
+                            }
+                            else
+                            {
+                                <label>Hiç Teklif Yapan Yok</label>
+                            }
+
+                            <br />
+                            <button type="submit" onclick="return confirm('Silmek istediğinizden emin misiniz ?')" class="btn btn-danger btn-md">Açık Artırmayı Sil</button>
+                        }
+                    }
+                    else // Açık Artırması Yoksa
+                    {
+                        if ((bool)item.satildimi)
+                        {
+                            <label>Satılmış İlana Açık Artırma Uygulanamaz.</label>
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("AcikArtirmaEkle", "Hesap", FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" value="@item.id" />
+                                <input type="number" name="gun" placeholder="Kaç Günlük?" style="margin-bottom:10px; margin-top:10px;" />
+                                <br />
+                                <button type="submit" class="btn btn-success btn-xs">İlana Açık Artırma Ekle</button>
+                            }
+                        }
+                    }
+
+                </td>
+                <td>
+                    @{
+                        if (item.OneCikar.Count > 0 && item.OneCikar.OrderByDescending(x => x.bitistarih).FirstOrDefault().bitistarih > DateTime.Now)
+                        { // hiç öne çıkarması var ve... bitiş tarihi en büyük olan, şuanki zamandan büyükse şuan harbiden öne çıkarması var demektir.
+                            TimeSpan kalanZaman = item.OneCikar.OrderByDescending(x => x.bitistarih).FirstOrDefault().bitistarih - DateTime.Now;
+
+                            <label style="color:green; margin-top:20px;"><strong>İlan Öne Çıkarıldı</strong></label>
+                            <br />
+                            <label style="color:seagreen; margin-top:10px;">(@(Math.Ceiling(kalanZaman.TotalDays)) Gün @(kalanZaman.Hours) Saat Kaldı.)</label>
+
+                        }
+                        else
+                        {
+                            <a href="/Hesap/ilanOneCikar/@item.id" class="btn btn-info btn-md" style="margin-top:20px;">Öne Çıkar</a>
+                        }
+                    }
+
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<br />

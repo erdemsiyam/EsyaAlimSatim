@@ -1,0 +1,85 @@
+﻿@model AlAbiVerAbi.Kullanici
+
+@{
+    ViewBag.Title = "Kullanici Detay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div class="row text-center">
+    <hr />
+    <div class="col-md-4 text-center">
+        <br />
+        @if (Model.KullaniciResim != null)
+        {
+            <img src="~/Image/kullanici/@Html.DisplayFor(model => model.KullaniciResim.ad)" height="100" width="100" />
+        }
+        else
+        {
+            <img src="~/Image/kullanici/bos.png" width="100" height="100" alt="@(Model.ad + " "+Model.soyad)" />
+        }
+        <br /><br />
+        <strong>Rolü :</strong>
+        @Html.DisplayFor(model => model.Rol.adi)
+        <br /><br />
+        <strong>@(Html.DisplayNameFor(model => model.ad) + " " + Html.DisplayNameFor(model => model.soyad))</strong>
+        @(Html.DisplayFor(model => model.ad) + " " + Html.DisplayFor(model => model.soyad))
+        <br /><br />
+        <strong>@Html.DisplayNameFor(model => model.mail)</strong>
+        @Html.DisplayFor(model => model.mail)
+        <br /><br />
+        <strong>@Html.DisplayNameFor(model => model.telefon)</strong>
+        @Html.DisplayFor(model => model.telefon)
+        <br /><br />
+        <strong>@Html.DisplayNameFor(model => model.olusturulmatarih)</strong>
+        @Html.DisplayFor(model => model.olusturulmatarih)
+        <br /><br />
+        <strong>@Html.DisplayNameFor(model => model.onaylimi)</strong>
+        @Html.DisplayFor(model => model.onaylimi)
+        <br /><br />
+        <strong>@Html.DisplayNameFor(model => model.engellimi)</strong>
+        @Html.DisplayFor(model => model.engellimi)
+    </div>
+    <div class="col-md-8 text-center">
+
+        <h3><i>İlanlari</i></h3>
+
+        <table class="table">
+            <tr>
+                <th scope="col">İlk Resim</th>
+                <th scope="col">İlan Başlık</th>
+                <th scope="col">Kategorisi</th>
+                <th scope="col">Oluşturulma Tarihi</th>
+                <th scope="col">Fiyatı</th>
+            </tr>
+
+            @{
+                Context ctx = new Context();
+                List<ilan> ilanlari = ctx.ilan.Where(x => x.kullanici_id == Model.id).OrderByDescending(x => x.ilantarih).ToList();
+                foreach (ilan item in ilanlari)
+                {
+                    <tr>
+                        <td>
+                            <img  src="~/Image/ilan/@item.ilanResim.FirstOrDefault().ad" width="100" height="100"/>
+                        </td>
+                        <td>
+                            <a href="/AnaSayfa/İlanDetay/@item.id">@item.baslik</a>
+                        </td>
+                        <td>
+                            @item.Kategori.ad
+                        </td>
+                        <td>
+                            @item.ilantarih
+                        </td>
+                        <td>
+                            @item.fiyat TL
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Kullanici Düzenle", "KullaniciDuzenle", new { id = Model.id } , new { @class = "btn btn-warning btn-xs"  })
+</p>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AlAbiVerAbi.Kategori>
+
+@{
+    ViewBag.Title = "Kategoriler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Kategori Ekle", "KategoriEkle",new { },new { @class = "btn btn-success btn-xs" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ad)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ad)
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "KategoriDuzenle", new { id = item.id } , new { @class = "btn btn-warning btn-xs" })
+            @Html.ActionLink("Sil", "KategoriSil", new { id = item.id }, new { @class = "btn btn-danger btn-xs", onclick = "return confirm('Silmek istediğinizden emin misiniz ?')"  })
+        </td>
+    </tr>
+}
+
+</table>

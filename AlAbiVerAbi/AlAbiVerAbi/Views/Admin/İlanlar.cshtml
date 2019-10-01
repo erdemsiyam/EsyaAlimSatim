@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "İlanlar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model IEnumerable<ilan>
+@using (Html.BeginForm("İlanlar", "Admin", FormMethod.Post, new { @class = "form-inline" }))
+{
+    <div class="form-group" style="margin-right:15px;">
+        <input type="text" name="kelimeArama" class="form-control" placeholder="Kelime İle Ara" />
+    </div>
+    <button type="submit" class="btn btn-default">Ara</button>
+}
+<table class="table table-striped" style="margin-top:10px;">
+    <thead>
+        <tr>
+            <th scope="col">İlk Resim</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.baslik)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.kategori_id)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.ilantarih)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.fiyat)</th>
+            <th scope="col">Açık Artırma</th>
+            <th scope="col">Öne Çıkar</th>
+            <th scope="col">İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (ilan item in Model)
+        {
+            <tr>
+                <td>
+                    <img  src="~/Image/ilan/@item.ilanResim.OrderBy(x=>x.sirasi).FirstOrDefault().ad" width="100" height="100" alt="@item.baslik"/>
+                </td>
+                <td><a href="/AnaSayfa/İlanDetay/@item.id">@Html.DisplayFor(modelItem => item.baslik)</a></td>
+                <td>@item.Kategori.ad</td>
+                <td>@item.ilantarih</td>
+                <td>@item.fiyat TL</td>
+                <td>
+                    @if (item.AcikArtirma != null)
+                    {
+                        AcikArtirma acikArtirma = item.AcikArtirma;
+                        if ((DateTime)acikArtirma.bitistarih > DateTime.Now)
+                        {
+                            TimeSpan kalanZaman = (DateTime)acikArtirma.bitistarih - DateTime.Now;
+                            <label>Kalan Zaman : @(Math.Ceiling(kalanZaman.TotalDays)) Gün @kalanZaman.Hours Saat</label>
+
+                        }
+                        else
+                        {
+                            TimeSpan kalanZaman = DateTime.Now - (DateTime)acikArtirma.bitistarih;
+                            <label>@(Math.Ceiling(kalanZaman.TotalDays)) Gün @kalanZaman.Hours Saat Önce Bitti</label>
+
+                        }
+
+                    }
+                    else
+                    {
+                        <label>Açık Artırması Yok</label>
+                    }
+                </td>
+                <td>
+                    @if (item.OneCikar.Count > 0 && item.OneCikar.OrderByDescending(x => x.bitistarih).FirstOrDefault().bitistarih > DateTime.Now)
+                    {
+                        OneCikar oneCikar = item.OneCikar.OrderByDescending(x => x.bitistarih).FirstOrDefault();
+                        TimeSpan kalanZaman = oneCikar.bitistarih - DateTime.Now;
+                        <label> Bitmesine : @(Math.Ceiling(kalanZaman.TotalDays)) Gün @kalanZaman.Hours Saat Kaldı.</label>
+                        using (Html.BeginForm("İlanÖneÇıkarGünEkle", "Admin", FormMethod.Post, new { @class = "form-inline" }))
+                        {
+                            <div class="form-group" style="margin-right:15px;">
+                                <input type="hidden" name="ilan_id" value="@item.id"/>
+                                <input type="number" name="gun_ekle" class="form-control" placeholder="Eklenecek Gün" />
+                            </div>
+                            <button type="submit" class="btn btn-info btn-xs">Gün Ekle</button>
+                        }
+                        <a href="/Admin/İlanÖneÇıkarSil/@item.id" onclick="return confirm('Silmek istediğinizden emin misiniz ?')" class="btn btn-danger btn-xs">Öne Çıkar Sil</a>
+                    }
+                    else
+                    {
+                        <label>Yok</label>
+                    }
+                </td>
+                <td>
+                    @if ((bool)item.ilanacikmi)
+                    {
+                        using (Html.BeginForm("İlanGizle", "Admin", FormMethod.Post, new { @class = "form-inline" }))
+                        {
+                            <div class="form-group" style="margin-right:15px;">
+                                <input type="hidden" name="ilan_id" value="@item.id" />
+                                <input type="hidden" name="gizle" value="false" />
+                            </div>
+                            <button type="submit" class="btn btn-warning">İlanı Gösterimden Çek</button>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("İlanGizle", "Admin", FormMethod.Post, new { @class = "form-inline" }))
+                        {
+                            <div class="form-group" style="margin-right:15px;">
+                                <input type="hidden" name="ilan_id" value="@item.id" />
+                                <input type="hidden" name="gizle" value="true" />
+                            </div>
+                            <button type="submit" class="btn btn-info">İlanı Gösterime Aç</button>
+                        }
+
+                    }
+                    <br />
+                    @Html.ActionLink("Detay", "İlanDetay", "AnaSayfa",new { id = item.id }, new { @class = "btn btn-info btn-xs" })
+                    @Html.ActionLink("Düzenle", "İlanDuzenle", new { id = item.id }, new { @class = "btn btn-warning btn-xs" })
+                    @Html.ActionLink("Sil", "İlanSil", new { id = item.id }, new { @class = "btn btn-danger btn-xs", onclick = "return confirm('Silmek istediğinizden emin misiniz ?')" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

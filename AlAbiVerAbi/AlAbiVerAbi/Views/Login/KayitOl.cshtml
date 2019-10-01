@@ -1,0 +1,43 @@
+﻿@model AlAbiVerAbi.Kullanici
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="container">
+
+    <div class="card card-container text-center">
+        <h2><strong>Al Abi Ver Abi</strong></h2>
+        <h3>Kayıt Ol</h3>
+        <br />
+        @using (Html.BeginForm("KayitOl", "Login", FormMethod.Post, new { @class = "form - signin", enctype = "multipart/form-data" }))
+        {
+            @Html.TextBoxFor(x => x.ad, new { @class = "form-control", placeholder = "Adınız", type = "text", required = "", autofocus = "" })
+            <br />
+            @Html.TextBoxFor(x => x.soyad, new { @class = "form-control", placeholder = "Soyadınız", type = "text", required = "" })
+            <br />
+            @Html.TextBoxFor(x => x.sifre, new { @class = "form-control", placeholder = "Şifre", type = "password", required = "" })
+            <br />
+            <input type="password" placeholder="Şifre (Tekrar)" name="sifre2" class="form-control" />
+            <br />
+            @Html.TextBoxFor(x => x.mail, new { @class = "form-control", placeholder = "E-mail", type = "email", required = "" })
+            <br />
+            @Html.TextBoxFor(x => x.telefon, new { @class = "form-control", placeholder = "Telefon", type = "text", required = "" })
+            <br />
+            <h5>Resim (Optionel)</h5>
+            <input type="file" name="gelenResim" class="form-control" placeholder="Bilgisayardan Resim Seçiniz">
+            <br />
+
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Kayıt Ol</button>
+        }
+        @Html.ActionLink("Giriş Yap", "Giris", "Login", new { @class = "forgot-password" })
+        @Html.ValidationSummary()
+    </div>
+    <br />
+    @if (TempData["Mesaj"] != null && TempData["MesajTip"] != null)
+    {
+        <div class="alert alert-@TempData["MesajTip"]">
+            @TempData["Mesaj"]
+        </div>
+    }
+</div>

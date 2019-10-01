@@ -1,0 +1,210 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+@section CssVeJs
+{ @* Bizim bootstrap ve jquery 'ler çaışmıyor netten çekiyoruz.*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+}
+@model ilan
+<div class="row"><div class="col-md-12 text-center"><h2><i>İlanım</i></h2></div></div>
+<br />
+<div class="row text-center">
+    <h2><strong><u>İlanım Detay</u></strong></h2>
+    <a class="btn btn-danger btn-lg pull-right" onclick="return confirm('Silmek istediğinizden emin misiniz ?')" href="/Hesap/İlanSil/@Model.id">İLANI SİL</a>
+
+    <a class="btn btn-warning btn-lg pull-right" href="/Hesap/ilanDuzenle/@Model.id" style="margin-right:10px;">İLANI DÜZENLE</a>
+    @if ((bool)Model.ilanacikmi)
+    {
+        <a href="/Hesap/İlanıGizle/@Model.id" class="btn btn-danger btn-lg pull-right" style="margin-right:10px;">İlanı Gizle</a>
+    }
+    else
+    {
+        <a href="/Hesap/İlanıAç/@Model.id" class="btn btn-info btn-lg pull-right" style="margin-right:10px;">İlanı Görünüme Aç</a>
+    }
+    @if ((bool)Model.satildimi)
+    {
+        using (Html.BeginForm("İlanSatildiGeriAl", "Hesap", FormMethod.Post))
+        {
+            <input type="hidden" name="id" value="@Model.id" />
+            <button type="submit" class="btn btn-warning btn-lg pull-right" style="margin-right:10px;">Tekrar Satışa Çıkar</button>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("İlanSatildi", "Hesap", FormMethod.Post))
+        {
+            <input type="hidden" name="id" value="@Model.id" />
+            <button type="submit" class="btn btn-warning btn-lg pull-right" style="margin-right:10px;">İlanı Satıldı İşaretle</button>
+        }
+    }
+</div>
+<div class="row text-center">
+    @{
+        if (Model.OneCikar.Count > 0 && Model.OneCikar.OrderByDescending(x => x.bitistarih).FirstOrDefault().bitistarih > DateTime.Now)
+        { // hiç öne çıkarması var ve... bitiş tarihi en büyük olan, şuanki zamandan büyükse şuan harbiden öne çıkarması var demektir.
+            TimeSpan kalanZaman = Model.OneCikar.OrderByDescending(x => x.bitistarih).FirstOrDefault().bitistarih - DateTime.Now;
+
+            <h3 style="color:green; margin-right:20px;"><strong>İlan Öne Çıkarıldı</strong></h3>
+            <br />
+            <h4 style="color:seagreen; margin-right:10px;">(@(Math.Ceiling(kalanZaman.TotalDays)) Gün @(kalanZaman.Hours) Saat Kaldı.)</h4>
+
+        }
+        else
+        {
+            <a href="/Hesap/ilanOneCikar/@Model.id" class="btn btn-success btn-lg" style="margin-right:20px;">Öne Çıkar</a>
+        }
+    }
+
+</div>
+<br />
+<br>
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                @{
+                    bool ilkResim = true;
+                    for (int i = 0; i < Model.ilanResim.Count; i++)
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@i" class="@(ilkResim?"active":"")"></li>
+                        ilkResim = false;
+                    }
+
+                }
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                @{
+                    ilkResim = true;
+                    foreach (ilanResim item in Model.ilanResim.OrderBy(x => x.sirasi).ToList())
+                    {
+                        <div class="item @(ilkResim?"active":"")">
+                            <img src="~/Image/ilan/@item.ad" alt="@Model.baslik" width="400" height="400">
+                        </div>
+                        ilkResim = false;
+                    }
+
+                }
+            </div>
+
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+
+        <h2><strong>@Model.baslik</strong> </h2>
+        <h3>Fiyat : @Model.fiyat TL</h3>
+        <br />
+        <h4>Kategori : @Model.Kategori.ad </h4>
+        <br />
+        <h4>Adres : @Adres.iller.FirstOrDefault(x => x.id == Convert.ToInt16(Model.il)).Ad / @Adres.ilçeler.FirstOrDefault(x => x.id == Convert.ToInt16(Model.ilce)).Ad / @Adres.mahalleler.FirstOrDefault(x => x.id == Convert.ToInt16(Model.mahalle)).Ad </h4>
+        <br />
+        <h4>Kullanım Süresi : @Model.kullanimsuresi </h4>
+        <br />
+        <h4>İlan Tarihi : @Model.ilantarih </h4>
+        <br />
+    </div>
+
+</div>
+<hr>
+<div class="row text-center">
+    <h2>AÇIKLAMA</h2>
+    <br />
+    <p>@Model.aciklama</p>
+    <hr>
+    <h2>SORUNU</h2>
+    <br />
+    <p>@Model.sorunu</p>
+
+</div>
+<hr>
+<div class="row text-center">
+    <!--Açık Artırma Varsa -->
+    @if (Model.AcikArtirma != null)
+    {
+        <br />
+        <h2>Açık Artırma</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">KullanıcıAdı</th>
+                    <th scope="col">Fiyat</th>
+                    <th scope="col">Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ bool ilkTeklif = true; int siralama = 1;}
+                @foreach (Teklif item in Model.AcikArtirma.Teklif.OrderByDescending(x => x.teklif1))
+                {
+                    if (ilkTeklif)
+                    {
+                        <tr class="success">
+                            <th scope="row">@siralama</th>
+                            <td>@item.Kullanici.ad @item.Kullanici.soyad</td>
+                            <td>@item.teklif1</td>
+                            <td>@item.tekliftarih</td>
+                        </tr>
+                        siralama++;
+                    }
+                    else
+                    {
+                        <tr>
+                            <th scope="row">@siralama</th>
+                            <td>@item.Kullanici.ad @item.Kullanici.soyad</td>
+                            <td>@item.teklif1</td>
+                            <td>@item.tekliftarih</td>
+                        </tr>
+                        siralama++;
+                    }
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<br />
+<div class="row text-center">
+    <h3>Açık Artırma İşlemleri</h3>
+    <br /><br />
+    <!-- AÇIK ARTIRMA SİL EKLE OLAYLARI-->
+    @if (Model.AcikArtirma == null)//Acik artırma yoksa
+    {
+        using (Html.BeginForm("AcikArtirmaEkle", "Hesap", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            @Html.HiddenFor(x => x.id)
+            <input type="number" name="gun" placeholder="Kaç Günlük?" style="margin-bottom:10px;" />
+            <br />
+            <button type="submit" class="btn btn-success btn-lg">Açık Artırma Ekle</button>
+        }
+    }
+    else // acikartırma varsa
+    {
+        if (Model.AcikArtirma.bitistarih < DateTime.Now)
+        {
+            <h3> İlanın Açık Artırması Bitmiştir (@((DateTime.Now - Model.AcikArtirma.bitistarih).Value.Days) Gün Önce)</h3>
+        }
+        using (Html.BeginForm("AcikArtirmaSil", "Hesap", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            @Html.HiddenFor(x => x.id)
+            <button type="submit" onclick="return confirm('Silmek istediğinizden emin misiniz ?')" class="btn btn-warning btn-lg">Açık Artırma Kaldır</button>
+        }
+    }
+
+
+</div>
+<hr>
+<br />
+<br />

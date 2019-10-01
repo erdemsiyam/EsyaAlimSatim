@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_indexLayout.cshtml";
+}
+
+@section CssVeJs{
+    @RenderSection("CssVeJs", false)
+}
+
+
+<hr>
+<div class="row">
+    <ul class="nav nav-pills">
+        <li class="@((ViewBag.Baslik != null && ViewBag.Baslik == "Hesabım")?"active":"")" style="margin-right:30px;">@Html.ActionLink("HESABIM", "Index", "Hesap")</li>
+        <li class="@((ViewBag.Baslik != null && ViewBag.Baslik == "İlanEkle") ? "active" : "")" style="margin-right:5px;">@Html.ActionLink("İlan Ekle", "İlanEkle", "Hesap")</li>
+        <li class="@((ViewBag.Baslik != null && ViewBag.Baslik == "İlanlarım")?"active":"")" style="margin-right:5px;">@Html.ActionLink("İlanlarım", "ilanlar", "Hesap")</li>
+        <li class="@((ViewBag.Baslik != null && ViewBag.Baslik == "Favorilerim")?"active":"")" style="margin-right:5px;">@Html.ActionLink("Favorilerim", "Favoriİlanlar", "Hesap")</li>
+        <li class="@((ViewBag.Baslik != null && ViewBag.Baslik == "Tekliflerim")?"active":"")" style="margin-right:5px;">@Html.ActionLink("Tekliflerim", "Tekliflerim", "Hesap")</li>
+        <li class="@((ViewBag.Baslik != null && ViewBag.Baslik == "Mesajlar")?"active":"")" style="margin-right:5px;">@Html.ActionLink("Mesajlar", "Mesajlar", "Hesap")</li>
+        <li class="@((ViewBag.Baslik != null && ViewBag.Baslik == "Diğer")?"active":"")" style="margin-right:5px;"><a href="#">Diğer</a></li>
+    </ul>
+</div>
+<hr>
+<br />
+@RenderBody()
+<strong></strong>

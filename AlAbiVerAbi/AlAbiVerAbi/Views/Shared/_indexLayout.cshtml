@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @if (ViewBag.Title != null)
+    {
+        <title>@ViewBag.Title</title>
+    }
+    else
+    {
+        <title>Al Abi Ver Abi</title>
+    }
+    <script src="~/Content/Template/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/Template/bootstrap.min.js"></script>
+    <link href="~/Content/Template/bootstrap.min.css" rel="stylesheet" />
+    @RenderSection("CssVeJs", false)
+</head>
+<body>
+    @{ 
+        List<Kategori> kategoriler = new Context().Kategori.ToList();
+    }
+    <div class="container">
+        <!-- navbar-->
+        <div class="row">
+
+            @if (TempData["Mesaj"] != null && TempData["MesajTip"] != null)
+            {
+                <div class="alert alert-@TempData["MesajTip"]">
+                    @TempData["Mesaj"]
+                </div>
+            }
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/AnaSayfa/Index"><strong>Al Abi Ver Abi</strong></a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav">
+                           
+                            <li class="@((ViewBag.Kategori != null && ViewBag.Kategori == "Genel")?"active":"")">@Html.ActionLink("Genel", "Index", "AnaSayfa")</li>
+
+                            @if (kategoriler != null)
+                            {
+                                foreach (Kategori item in kategoriler)
+                                {
+                                    <li class="@((ViewBag.Kategori != null && ViewBag.Kategori == item.ad)?"active":"")"><a href="/AnaSayfa/KategoriGetir/@item.id">@item.ad</a></li>
+                                }
+                            }
+                        </ul>
+                        @{
+                            Kullanici kullanici = (Kullanici)HttpContext.Current.Session["Kullanici"];
+                            if (kullanici != null)
+                            {
+                                /*
+                                  Kullanıcının mesajları tektek bakılır görmediği mesaj varsa  Mesaj sekmesinin yanındaki paranteze yazılır
+                                 */
+                                int mesajSayisi = 0;
+                                List<ilanMesaj> imesajlar = new Context().ilanMesaj.Where(x => x.alici_kullanici_id == kullanici.id || x.satici_kullanici_id == kullanici.id).ToList();
+                                foreach (ilanMesaj item1 in imesajlar)
+                                {
+                                    bool alicimi = item1.alici_kullanici_id == kullanici.id;
+                                    foreach (Mesaj item2 in item1.Mesaj.ToList())
+                                    {
+                                        if (alicimi && !(bool)item2.mesajalicininmi && !(bool)item2.gordumu) // kendisi alıcı , mesaj satıcının , görülmemişse
+                                        {
+                                            mesajSayisi++;
+                                        }
+                                        else if (!alicimi && (bool)item2.mesajalicininmi && !(bool)item2.gordumu)// kendisi satıcı , mesaj alıcının , görülmemişse
+                                        {
+                                            mesajSayisi++;
+                                        }
+                                    }
+                                }
+                                @* Bunları Html.Action ile yapmadık çünkü, a tagın içine strong yazmamız lazım.*@
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="/Hesap/İlanEkle" style="font-weight: bold; ">+ İlan Ekle</a></li>
+                                    <li><a href="/Hesap/Mesajlar"><strong>Mesaj</strong>@(mesajSayisi > 0 ? "(" + mesajSayisi + ")" : "")</a></li>
+                                    <li class="@((ViewBag.Baslik != null)?"active":"")"><a  href="/Hesap/Index"><strong>Hesabım</strong> (@kullanici.ad)</a></li> 
+                                    @* viewbag.baslik hesabım controllerde kullanılıyordu, eğer bu doluysa hesap kısmındayız demektir ozaman active ekleriz.*@
+                                    <li>@Html.ActionLink("Çıkış Yap", "Cikis", "Login")</li>
+                                </ul>
+
+                            }
+                            else
+                            {
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="/Login/Giris"><strong>Giriş Yap</strong></a></li>
+                                    <li><a href="/Login/KayitOl"><strong>Kayıt Ol</strong></a></li>
+                                </ul>
+
+                            }
+                        }
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+        </div>
+        @RenderBody()
+        <script>
+            var alertDiv = $(".alert");
+            setTimeout(
+                function () {
+                    alertDiv.remove();
+                }, 4000);
+        </script>
+    </div>
+
+</body>
+</html>

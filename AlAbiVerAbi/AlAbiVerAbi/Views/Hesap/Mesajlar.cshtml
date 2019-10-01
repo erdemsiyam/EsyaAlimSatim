@@ -1,0 +1,113 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+@section CssVeJs{
+
+    <script src="~/Content/Template/mesaj.js"></script>
+    <link href="~/Content/Template/mesaj.css" rel="stylesheet" />
+}
+
+@model IEnumerable<ilanMesaj>
+<div class="row"><div class="col-md-12 text-center"><h2><i>Mesajlarım</i></h2></div></div>
+<br />
+<div class="row">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bhoechie-tab-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bhoechie-tab-menu">
+            <div class="list-group">
+                @{ bool ilkmi = true; Kullanici oturum = (Kullanici)HttpContext.Current.Session["Kullanici"];}
+                @foreach (ilanMesaj item in Model)
+                {
+                    bool alimmi = item.alici_kullanici_id == oturum.id;
+                    <a href="#" class="list-group-item @(ilkmi ? "active" : "") text-center">
+                        <h4>@(alimmi ? "ALIM" : "SATIM")</h4>
+                        <h5>@item.ilan.baslik</h5>
+                        <h5>@(alimmi ? item.Kullanici.ad + " " + item.Kullanici.soyad : item.Kullanici1.ad + " " + item.Kullanici1.soyad )</h5> @*Kullanıcı1 : Alıcı , Kullanıcı :Satıcı*@
+                        @{ // görülmeyen mesaj sayısı çıkartılır.
+                            int gorulmeyen_mesajlar = item.Mesaj.Where(x => x.mesajalicininmi == !alimmi && x.gordumu == false).Count();
+
+                            if (gorulmeyen_mesajlar > 0)
+                            {
+                                <h5><strong>(@gorulmeyen_mesajlar) Yeni Mesaj</strong></h5>
+                            }
+                        }
+                    </a>
+                    ilkmi = false;
+                }
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab">
+            @{ ilkmi = true;}
+            @foreach (ilanMesaj item1 in Model)
+            {
+                bool alimmi = item1.alici_kullanici_id == oturum.id;
+                <div class="bhoechie-tab-content @(ilkmi ? "active":"")">
+                    <h4><a href="/AnaSayfa/İlanDetay/@item1.ilan.id">@item1.ilan.baslik @item1.ilan.fiyat TL (İlana Git)</a></h4>
+                    <br />
+                    @using (Html.BeginForm("MesajSil", "Hesap", FormMethod.Post))
+                    {
+                        <input type="hidden" name="ilanMesaj_id" value="@item1.id" />
+                        <button type="submit" onclick="return confirm('Silmek istediğinizden emin misiniz ?')" class="btn btn-danger btn-lg pull-right">Bu Konuşmayı Sil</button>
+                    }
+                    @foreach (Mesaj item2 in item1.Mesaj.OrderBy(x => x.tarih).ToList())
+                    {
+                        if (alimmi && (bool)item2.mesajalicininmi) // kendisi alici , mesaj alıcınınsa
+                        {
+                            <h4><strong> Sen </strong>: @item2.mesaj1 (@item2.tarih)</h4>
+                        }
+                        else if (alimmi && !(bool)item2.mesajalicininmi)// kendisi alıcı , mesaj satıcınınsa
+                        {
+                            <h4><strong> @item2.ilanMesaj.Kullanici.ad @item2.ilanMesaj.Kullanici.soyad </strong>: @item2.mesaj1 (@item2.tarih)</h4> @* Kullanici = Satıcı . Kullanici1 = alıcı*@
+                        }
+                        else if (!alimmi && (bool)item2.mesajalicininmi)// kendisi satıcıysa, mesaj alıcınınsa
+                        {
+                            <h4><strong> @item2.ilanMesaj.Kullanici1.ad @item2.ilanMesaj.Kullanici1.soyad </strong>: @item2.mesaj1 (@item2.tarih)</h4> @* Kullanici = Satıcı . Kullanici1 = alıcı*@
+                        }
+                        else if (!alimmi && !(bool)item2.mesajalicininmi) // kendisi satıcı, mesaj satıcıysa
+                        {
+                            <h4><strong> Sen </strong>: @item2.mesaj1 (@item2.tarih)</h4>
+                        }
+                    }
+                    @if ((bool)item1.ilan.satildimi == true) // ilan satılmışsa mesaj atamasın.
+                    {
+                        <br />
+                        <h4><i><strong>EŞYA SATILMIŞTIR</strong> (Mesaj Atılamaz)</i></h4>
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("MesajAt", "Hesap", FormMethod.Post))
+                        {
+                            <input type="hidden" name="ilanMesaj_id" value="@item1.id" />
+                            <input type="text" name="mesaj" />
+                            <button type="submit" class="btn btn-info btn-lg ">Mesaj Gönder</button>
+                        }
+                    }
+                </div>
+                ilkmi = false;
+            }
+        </div>
+    </div>
+</div>
+<br />
+<br />
+@*
+    SAYFAYA GİRDİĞİN GİBİ MESAJLARI GÖRDÜM DİYE AJAX İLE ONAY GÖNDER
+*@
+<script>
+    console.log("asd");
+    $(document).ready(function () {
+    $.ajax({
+                    method: "GET",
+                    url: '@Url.Action("MesajlariGordu", "Hesap")'
+                }).done(
+                    function (result) {
+                        console.log(result);
+                }).fail(
+                function () {
+                    console.log("Mesajlar Silinemedi");
+                }
+        )
+    });
+
+</script>

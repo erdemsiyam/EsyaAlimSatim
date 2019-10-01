@@ -1,0 +1,225 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_indexLayout.cshtml";
+}
+@model ilan
+<!-- navbar-->
+@section CssVeJs
+{ @* Bizim bootstrap ve jquery 'ler çaışmıyor netten çekiyoruz.*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+}
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                @{
+                    bool ilkResim = true;
+                    for (int i = 0; i < Model.ilanResim.Count; i++)
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@i" class="@(ilkResim ? "active" : "")"></li>
+                        ilkResim = false;
+                    }
+
+                }
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                @{
+                    ilkResim = true;
+                    foreach (ilanResim item in Model.ilanResim.OrderBy(x => x.sirasi).ToList())
+                    {
+                        <div class="item @(ilkResim ? "active" : "")">
+                            <img src="~/Image/ilan/@item.ad" alt="@Model.baslik" width="400" height="400">
+                        </div>
+                        ilkResim = false;
+                    }
+
+                }
+            </div>
+
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+
+        <h2><strong>@Model.baslik</strong> </h2>
+        <h3>@Model.fiyat TL</h3>
+        <!--YILDIZ BUL -->
+        @{
+            Kullanici oturumKul = (Kullanici)HttpContext.Current.Session["Kullanici"];
+
+            if (oturumKul != null && Model.kullanici_id != oturumKul.id)//oturumu açıksa ve bu ilanın sahibi değilse
+            {
+                Favoriilan fav = new Context().Favoriilan.FirstOrDefault(x => x.kullanici_id == oturumKul.id && x.ilan_id == Model.id);
+
+                if (fav == null)
+                {
+                    <h4 class="text-right" style="color:green"><a href="/Hesap/FavoriEkle/@Model.id"><strong>Favorilere Ekle</strong></a></h4>
+                }
+                else
+                {
+                    <h4 class="text-right" style="color:darkred"><a href="/Hesap/FavoriSil/@Model.id"><strong>Favorilerden Çıkar</strong></a></h4>
+                }
+            }
+        }
+
+
+        <h4>Sahibi : <a href="/AnaSayfa/Kullaniciİlanlari/@Model.kullanici_id"> @Model.Kullanici.ad @Model.Kullanici.soyad @((oturumKul != null && oturumKul.id == Model.kullanici_id) ? "(Ben)" : "")</a></h4>
+        <br />
+        <h4>Kategori : @Model.Kategori.ad  </h4>
+        <br />
+        <h4>Adres :  @Adres.iller.FirstOrDefault(x => x.id == Convert.ToInt16(Model.il)).Ad / @Adres.ilçeler.FirstOrDefault(x => x.id == Convert.ToInt16(Model.ilce)).Ad / @Adres.mahalleler.FirstOrDefault(x => x.id == Convert.ToInt16(Model.mahalle)).Ad </h4>
+        <br />
+        <h4>Kullanım Süresi : @Model.kullanimsuresi </h4>
+        <br />
+        <h4>İlan Tarihi : @Model.ilantarih </h4>
+        <br />
+    </div>
+
+</div>
+<hr>
+<div class="row text-center">
+    <h2>AÇIKLAMA</h2>
+    <br />
+    <p>@Model.aciklama</p>
+    <hr>
+    <h2>SORUNU</h2>
+    <br />
+    <p>@Model.sorunu</p>
+
+</div>
+
+@if ((Kullanici)HttpContext.Current.Session["Kullanici"] != null && Model.kullanici_id != oturumKul.id) // kullanıcı oturum açmış mı ve Eğer Bu ilanı paylaşan kişi oturumdaki kişi değilse, çünkü kendine mesaj atamaz
+{
+    <hr>
+    <div class="row text-center">
+        <h3>İlana Mesaj At</h3>
+        @using (Html.BeginForm("İlanaMesajAt", "AnaSayfa", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            <input type="hidden" name="ilanid" value="@Model.id" />
+            <div class="form-group">
+                <input type="text" name="mesaj" class="form-control" placeholder="Soru Sor">
+            </div>
+            <button type="submit" class="btn btn-success btn-md">Gönder</button>
+        }
+    </div>
+}
+@if (Model.AcikArtirma != null)
+{
+    <hr>
+    <div class="row text-center">
+        <!--Açık Artırma Varsa -->
+
+        <br />
+        <h2>Açık Artırma</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">KullanıcıAdı</th>
+                    <th scope="col">Fiyat</th>
+                    <th scope="col">Tarih</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ bool ilkTeklif = true; int siralama = 1;}
+                @foreach (Teklif item in Model.AcikArtirma.Teklif.OrderByDescending(x => x.teklif1))
+                {
+                    if (ilkTeklif)
+                    {
+                        <tr class="success">
+                            <th scope="row">@siralama</th>
+                            <td>@item.Kullanici.ad @item.Kullanici.soyad</td>
+                            <td>@item.teklif1</td>
+                            <td>@item.tekliftarih</td>
+                            <td>
+                                @{
+                                    Kullanici oturum = (Kullanici)HttpContext.Current.Session["Kullanici"];
+                                    if (oturum != null)
+                                    {
+                                        if (item.alici_kullanici_id == oturum.id && item.AcikArtirma.bitistarih > DateTime.Now) // eğer teklif benim se ve açık artırma bitmediyse , teklifimi silebilme hakkına sahibim.
+                                        {
+                                            <a href="/Hesap/TeklifSil/@item.id">Teklifimi Sil</a>
+                                        }
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        siralama++;
+                        ilkTeklif = false;
+                    }
+                    else
+                    {
+                        <tr>
+                            <th scope="row">@siralama</th>
+                            <td>@item.Kullanici.ad @item.Kullanici.soyad</td>
+                            <td>@item.teklif1</td>
+                            <td>@item.tekliftarih</td>
+                            <td>
+                                @{
+                                    Kullanici oturum = (Kullanici)HttpContext.Current.Session["Kullanici"];
+                                    if (oturum != null)
+                                    {
+                                        if (item.alici_kullanici_id == oturum.id)
+                                        {
+                                            <a href="/Hesap/TeklifSil/@item.id">Teklifimi Sil</a>
+                                        }
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        siralama++;
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <br />
+}
+@if (Model.AcikArtirma != null && (Kullanici)HttpContext.Current.Session["Kullanici"] != null && Model.kullanici_id != oturumKul.id) // acik artirma var ve kullanıcı da loginse , ama aynı zamanda, ilanın sahibi değilse
+{
+    <div class="row text-center">
+        @if (Model.AcikArtirma.bitistarih < DateTime.Now) // acik artirma tarihi bitmişse
+        {
+            <h3> İlanın Açık Artırması Bitmiştir (@((DateTime.Now - Model.AcikArtirma.bitistarih).Value.Days) Gün Önce)</h3>
+        }
+        else
+        {
+            <h3> Açık Artırmanın Bitişine @((Model.AcikArtirma.bitistarih - DateTime.Now).Value.Days) Gün Kaldı</h3>
+            using (Html.BeginForm("TeklifYap", "AnaSayfa", FormMethod.Post, new { @class = "form-inline" }))
+            {
+                <h3>Teklif Ver</h3>
+                @Html.Hidden("ilanid", Model.id)
+                <div class="form-group">
+                    @Html.TextBox("tekliffiyat", "", new { @class = "form-control", placeholder = "Teklif Fiyatı", type = "number" })
+                </div>
+                <button type="submit" class="btn btn-success btn-md">Gönder</button>
+            }
+        }
+    </div>
+}
+else if ((Kullanici)HttpContext.Current.Session["Kullanici"] == null)
+{
+    <div class="row text-center">
+        <a href="/Login/Giris" class="btn btn-success btn-md">Açık Artırma İçin Giriş Yapınız</a>
+    </div>
+}
+
+
+<hr>
+<br />
+<br />

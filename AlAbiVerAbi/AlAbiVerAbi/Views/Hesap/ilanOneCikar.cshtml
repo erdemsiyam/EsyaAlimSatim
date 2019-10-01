@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+@model ilan
+<div class="row"><div class="col-md-12 text-center"><h2><i>İlan Öne Çıkar</i></h2></div></div>
+<br />
+<div class="row text-center">
+    <h2>İlan Başlığı : @Model.baslik</h2>
+    <br />
+</div>
+<div class="row text-center">
+    <div class="col-md-offset-3 col-md-6">
+        @using (Html.BeginForm("ilanOneCikar", "Hesap", FormMethod.Post))
+        {
+            <div class="form-group">
+                <h3><strong>Paketini Seç</strong></h3>
+                <br />
+                @Html.DropDownList("secilenPaket", OneCikarPaket.paketSelectList, "Paketini Seç", new { @class = "form-control" })
+            </div>
+            <input type="hidden" name="ilan_id" value="@Model.id" />
+            <br />
+            <button type="submit" class="btn btn-success btn-lg">İLANI ÖNE ÇIKAR</button>
+            <br /><br />
+            <a class="btn btn-danger btn-md" href="#" role="button">İptal</a>
+        }
+    </div>
+</div>

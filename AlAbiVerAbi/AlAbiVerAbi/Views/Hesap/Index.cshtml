@@ -1,0 +1,144 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+
+@*Kullanıcının ana sayfası, burası istatistik vs doldurulabilir*@
+@model IEnumerable<AcikArtirma>
+<div class="row text-center">
+    <div class="col-md-3 text-center">
+
+        @{ Kullanici kullanici = (Kullanici)HttpContext.Current.Session["Kullanici"];
+
+            if (kullanici.Rol.adi == "Admin")
+            {
+                <a href="/Admin/Index" class="btn btn-info btn-md">Admin Paneline Git</a>
+            }
+        }
+        <br />
+        <img src="~/Image/kullanici/@((kullanici.KullaniciResim == null)?"bos.png":kullanici.KullaniciResim.ad)" width="200" height="200" />
+        <br />
+        <br />
+        <label>Adı :</label>
+        <label>@kullanici.ad @kullanici.soyad</label>
+        <br />
+        <label>Mail :</label>
+        <label>@kullanici.mail</label>
+        <br />
+        <label>Telefon :</label>
+        <label>@kullanici.telefon</label>
+        <br />
+        <br />
+        @Html.ActionLink("Hesabımı Düzenle", "KullaniciDuzenle", "Hesap", new { @class = "btn btn-info btn-md" })
+        <br />
+        @if (!(bool)kullanici.onaylimi)
+        {
+            <br />
+            <a href="/Login/OnayIstek" class="btn btn-warning btn-lg">Hesabımı ONAYLA</a>
+        }
+
+    </div>
+    <div class="col-md-9 text-center">
+        @{
+            int toplam_ilan_sayisi = kullanici.ilan.Count;
+            int toplam_gosterimde_olan_ilan_sayisi = kullanici.ilan.Where(x => x.ilanacikmi == true && x.satildimi == false).Count();
+            int toplam_satılan_ilan_sayisi = kullanici.ilan.Where(x => x.satildimi == true).Count();
+        }
+        <div class="col-md-4 text-center">
+            <div class="small-box bg-primary">
+                <div class="inner">
+                    <h3>@toplam_ilan_sayisi</h3>
+                    <p>İLAN SAYISI</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>@toplam_gosterimde_olan_ilan_sayisi</h3>
+                    <p>Gösterimde Olan</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@toplam_satılan_ilan_sayisi</h3>
+                    <p>Satılan</p>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        @{
+            List<AcikArtirma> bitenAcikArtirmalar = Model.Where(x => x.bitistarih < DateTime.Now).ToList();
+
+            if (bitenAcikArtirmalar != null && bitenAcikArtirmalar.Count > 0)
+            {
+                <br />
+                <br />
+                <hr>
+                <div class="col-md-12 text-center">
+                    <h3> Açık Artırması Biten İlanlarım </h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Başlık (İlana Git)</th>
+                                <th scope="col">Kazanan Adı (Teklif)</th>
+                                <th scope="col">Mesaj At</th>
+                                <th scope="col">Ne Zaman Bitti</th>
+                                <th scope="col">AcikArtirma Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (AcikArtirma item in bitenAcikArtirmalar)
+                            {
+                                ilan ilanim = item.ilan.FirstOrDefault();
+                                Teklif teklif = item.Teklif.OrderByDescending(x => x.teklif1).FirstOrDefault();
+
+                                <tr>
+                                    <td><a href="/Hesap/İlanDetay/@ilanim.id">@ilanim.baslik (@ilanim.fiyat TL)</a></td>
+                                    @if (teklif != null)
+                                    {
+                                        Kullanici kazanan = teklif.Kullanici;
+                                        <td><a href="/AnaSayfa/Kullaniciİlanlari/@kazanan.id">@kazanan.ad @kazanan.soyad (@teklif.teklif1 TL)</a></td>
+                                        <td>
+                                            @using (Html.BeginForm("AcikArtirmaKazananaMesajAt", "Hesap", FormMethod.Post))
+                                            {
+                                                <input type="hidden" name="ilan_id" value="@ilanim.id" />
+                                                <input type="hidden" name="kazanan_id" value="@kazanan.id" />
+                                                <button type="submit" class="btn btn-success btn-md ">Ona Bu Öğeyi Satmak İçin Mesaj At</button>
+                                            }
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>Kazanan Yok</td>
+                                        <td>Kazanan Yok</td>
+                                    }
+                                    <td>@((DateTime.Now - item.bitistarih).Value.Days) Gün Önce</td>
+                                    <td>
+                                        @using (Html.BeginForm("AcikArtirmaSil", "Hesap", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="id" value="@ilanim.id" />
+                                            <button type="submit" onclick="return confirm('Silmek istediğinizden emin misiniz ?')" class="btn btn-danger btn-md ">Açık Artırmayı Sil</button>
+                                        }
+                                        @using (Html.BeginForm("İlanSatildi", "Hesap", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="id" value="@ilanim.id" />
+                                            <button type="submit" class="btn btn-warning btn-md ">İlanı Satıldı İşaretle</button>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+

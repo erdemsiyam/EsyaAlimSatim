@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Admin Paneli - Giriş Sayfası";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{ 
+    Context ctx = new Context();
+    int aktifKullanicilar = ctx.Kullanici.Where(x=>x.engellimi==false && x.onaylimi == true).Count();
+    int onaysizKullanicilar = ctx.Kullanici.Where(x => x.onaylimi == false).Count();
+    int engelliKullanicilar = ctx.Kullanici.Where(x => x.engellimi == true).Count();
+    int aktifİlanlar = ctx.ilan.Where(x => x.satildimi == false && x.ilanacikmi == true).Count();
+    int satilanİlanlar = ctx.ilan.Where(x => x.satildimi == true).Count();
+    int acikArtirmaliİlanlar = ctx.ilan.Where(x => x.AcikArtirma != null).Count();
+}
+<br />
+<br />
+<div class="col-lg-4 col-6">
+    <!-- small box -->
+    <div class="small-box bg-info">
+        <div class="inner">
+            <h3>@aktifKullanicilar</h3>
+            <p>Aktif Kullanıcı</p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-6">
+    <!-- small box -->
+    <div class="small-box bg-warning">
+        <div class="inner">
+            <h3>@onaysizKullanicilar</h3>
+            <p>Onaysız Kullanıcı</p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-6">
+    <!-- small box -->
+    <div class="small-box bg-danger">
+        <div class="inner">
+            <h3>@engelliKullanicilar</h3>
+            <p>Engelli Kullanıcı</p>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="col-lg-4 col-6">
+    <!-- small box -->
+    <div class="small-box bg-info">
+        <div class="inner">
+            <h3>@aktifİlanlar</h3>
+            <p>Aktif İlanlar</p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-6">
+    <!-- small box -->
+    <div class="small-box bg-success">
+        <div class="inner">
+            <h3>@satilanİlanlar</h3>
+            <p>Satılmış İlanlar</p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4 col-6">
+    <!-- small box -->
+    <div class="small-box bg-success">
+        <div class="inner">
+            <h3>@acikArtirmaliİlanlar</h3>
+            <p>Açık Artırmalı İlanlar</p>
+        </div>
+    </div>
+</div>

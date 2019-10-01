@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.Title = "Giriş Yap";
+}
+@model Kullanici
+
+<div class="container">
+    <div class="card card-container text-center">
+        <h2><strong>Al Abi Ver Abi</strong></h2>
+        <br />
+        @using (Html.BeginForm("Giris", "Login", FormMethod.Post, new { @class = "form - signin" }))
+        {
+            @Html.TextBoxFor(x => x.mail, new { @class = "form-control", placeholder = "E-mail", type = "email", required = "", autofocus = "" })
+            <br />
+            @Html.TextBoxFor(x => x.sifre, new { @class = "form-control", placeholder = "Şifre", type = "password", required = "" })
+            <br />
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Giriş Yap</button>
+        }
+        @Html.ActionLink("Kayıt Ol", "KayitOl", "Login", new { @class = "forgot-password" })
+        <br /><br />
+        @Html.ActionLink("Şifremi Unuttum", "SifremiUnuttum", "Login", new { @class = "forgot-password" })
+    </div>
+    <br />
+    @if (TempData["Mesaj"] != null && TempData["MesajTip"] != null)
+    {
+        <div class="alert alert-@TempData["MesajTip"]">
+            @TempData["Mesaj"]
+        </div>
+    }
+</div>
+

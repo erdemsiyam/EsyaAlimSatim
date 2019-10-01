@@ -1,0 +1,146 @@
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\AlAbiVerAbi.dll.config
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\AlAbiVerAbi.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\AlAbiVerAbi.pdb
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csc.exe
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csc.exe.config
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csc.rsp
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csi.exe
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csi.exe.config
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csi.rsp
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.AppContext.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Console.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.Compression.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Claims.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.ValueTuple.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\vbc.exe
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\vbc.exe.config
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\vbc.rsp
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\VBCSCompiler.exe
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\EntityFramework.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\EntityFramework.SqlServer.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Helpers.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Mvc.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Razor.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.Deployment.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.Razor.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\EntityFramework.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\EntityFramework.SqlServer.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Razor.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.Deployment.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.Razor.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Helpers.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Mvc.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.csprojAssemblyReference.cache
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.csproj.CoreCompileInputs.cache
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.csproj.CopyComplete
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.dll
+C:\Users\Erdem\Documents\Visual Studio 2017\Projects\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.pdb
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\AlAbiVerAbi.dll.config
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\AlAbiVerAbi.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\AlAbiVerAbi.pdb
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csc.exe
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csc.exe.config
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csc.rsp
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csi.exe
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csi.exe.config
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\csi.rsp
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.AppContext.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Console.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.Compression.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.IO.Pipes.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Claims.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.ValueTuple.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\vbc.exe
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\vbc.exe.config
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\vbc.rsp
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\VBCSCompiler.exe
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\EntityFramework.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\EntityFramework.SqlServer.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Helpers.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Mvc.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Razor.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.Deployment.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.Razor.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\EntityFramework.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\EntityFramework.SqlServer.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Razor.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.Deployment.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Webpages.Razor.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Helpers.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\System.Web.Mvc.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.csprojAssemblyReference.cache
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.csproj.CoreCompileInputs.cache
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.csproj.CopyComplete
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.dll
+C:\Users\Erdem\Desktop\7.Dönem\İnternet Mühendisliği\PROJE\AlAbiVerAbi\AlAbiVerAbi\obj\Debug\AlAbiVerAbi.pdb

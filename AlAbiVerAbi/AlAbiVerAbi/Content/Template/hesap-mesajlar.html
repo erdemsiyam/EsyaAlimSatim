@@ -1,0 +1,128 @@
+<html>
+	<head>
+		<title>Ana Sayfa</title>
+		
+		<script src="jquery-3.3.1.min.js"></script>
+		<script src="bootstrap.min.js"></script>
+		<link href="bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+	
+		<div class="container">
+			<!-- navbar-->
+			<div class="row">
+			
+				<nav class="navbar navbar-default">
+				  <div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+					  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					  </button>
+					  <a class="navbar-brand" href="#"><strong>Al Abi Ver Abi</strong></a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					
+					  <ul class="nav navbar-nav">
+						<li ><a href="#">Genel <span class="sr-only">(current)</span></a></li>
+						<li><a href="#">Teknoloji</a></li>
+						<li><a href="#">Eğlence</a></li>
+						<li><a href="#">Sağlık</a></li>
+					  </ul>
+					  
+					  <ul class="nav navbar-nav navbar-right">
+						<li><a href="#" style="font-weight: bold; margin-right:20px;">+ İlan Ekle</a></li>
+						<li><a href="#" ><strong>Mesaj</strong>(0)</a></li>
+						<li class="active"><a href="#" ><strong>Hesabım</strong> (Ahmet Çalışkan)</a></li>
+					  </ul>
+					</div><!-- /.navbar-collapse -->
+				  </div><!-- /.container-fluid -->
+				</nav>
+			
+			</div>
+			<div class="row">
+				<ul class="nav nav-pills">
+				  <li style="margin-right:30px;" ><a href="#" ><strong>HESABIM</strong></a></li>
+				  <li ><a href="#"><strong>İlan Ekle</strong></a></li>
+				  <li ><a href="#"><strong>İlanlarım</strong></a></li>
+				  <li ><a href="#"><strong>Favorilerim</strong></a></li>
+				  <li ><a href="#"><strong>Tekliflerim</strong></a></li>
+				  <li class="active"><a href="#"><strong>Mesajlar</strong></a></li>
+				  <li><a href="#"><strong>Diğer</strong></a></li>
+				</ul>
+			</div>
+			<div class="row">
+				<h1>Mesajlarım</h1>
+			</div>
+			<br>
+			
+			<div class="row">
+					<ul class="nav nav-pills nav-stacked col-md-2">
+					  <li class="active"><a href="#tab_a" data-toggle="tab">İlan Başlık (Satış)</a></li>
+					  <li><a href="#tab_b" data-toggle="tab">İlan Başlık (Alış)</a></li>
+					  <li><a href="#tab_c" data-toggle="tab">İlan Başlık (Satış)</a></li>
+					  <li><a href="#tab_d" data-toggle="tab">İlan Başlık (Satış)</a></li>
+					</ul>
+					<div class="tab-content col-md-10">
+							<div class="tab-pane active" id="tab_a">
+								<h4><a href="#">İlan Başlık (Fiyat)</a></h4><!-- İLANA GİDEBİLSİN-->
+								<a class="btn btn-danger btn-xs pull-right">Bu Konuşmayı Sil</a>
+								<p>kulAdi : Hocam Son ne Olur</p>
+								<p>Sen : 20 indiririm</p>
+								<p>kulAdi : Uygundur</p>
+								<form class="form-inline">
+								  <div class="form-group">
+									<input type="text" class="form-control" id="exampleInputName2" placeholder="Cevap Yaz">
+								  </div>
+								  <button type="submit" class="btn btn-success btn-md">Gönder</button>
+								</form>
+							</div>
+							<div class="tab-pane" id="tab_b">
+								<h4><a href="#">İlan Başlık (Fiyat)</a></h4><!-- İLANA GİDEBİLSİN-->
+								<a class="btn btn-danger btn-xs pull-right">Bu Konuşmayı Sil</a>
+								<p>kulAdi : Yap Bir şeyler ya</p>
+								<form class="form-inline">
+								  <div class="form-group">
+									<input type="text" class="form-control" id="exampleInputName2" placeholder="Cevap Yaz">
+								  </div>
+								  <button type="submit" class="btn btn-success btn-md">Gönder</button>
+								</form>
+							</div>
+							<div class="tab-pane" id="tab_c">
+								<h4><a href="#">İlan Başlık (Fiyat)</a></h4><!-- İLANA GİDEBİLSİN-->
+								<a class="btn btn-danger btn-xs pull-right">Bu Konuşmayı Sil</a>
+								<p>kulAdi : Alıcıyım hemen buluşalım</p>
+								<p>Sen : tamamdır</p>
+								<form class="form-inline">
+								  <div class="form-group">
+									<input type="text" class="form-control" id="exampleInputName2" placeholder="Cevap Yaz">
+								  </div>
+								  <button type="submit" class="btn btn-success btn-md">Gönder</button>
+								</form>
+							</div>
+							<div class="tab-pane" id="tab_d">
+								<h4><a href="#">İlan Başlık (Fiyat)</a></h4><!-- İLANA GİDEBİLSİN-->
+								<a class="btn btn-danger btn-xs pull-right">Bu Konuşmayı Sil</a>
+								<p>kulAdi : Hocam Son ne Olur</p>
+								<p>Sen : 20 indiririm</p>
+								<p>kulAdi : Uygundur</p>
+								<form class="form-inline">
+								  <div class="form-group">
+									<input type="text" class="form-control" id="exampleInputName2" placeholder="Cevap Yaz">
+								  </div>
+								  <button type="submit" class="btn btn-success btn-md">Gönder</button>
+								</form>
+							</div>
+					</div>
+			</div>
+			</br>
+			</br>
+		</div>
+
+	</body>
+</html>

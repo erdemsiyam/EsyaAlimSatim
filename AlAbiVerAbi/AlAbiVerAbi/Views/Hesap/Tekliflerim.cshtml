@@ -1,0 +1,116 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+@model IEnumerable<HesapTekliflerim>
+
+<div class="row"><div class="col-md-12 text-center"><h2><i>Tekliflerim</i></h2></div></div>
+<br />
+<div class="row text-center">
+    <!--Açık Artırma Varsa -->
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">İlan Resim</th>
+                <th scope="col">Başlık (ilana git)</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Fiyat</th>
+                <th scope="col">Teklif Sıram</th>
+                <th scope="col">İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (HesapTekliflerim item in Model)
+            {
+                ilan gelenIlan = item.teklif.AcikArtirma.ilan.FirstOrDefault();
+                <tr>
+                    <td><img src="~/Image/ilan/@gelenIlan.ilanResim.FirstOrDefault().ad" alt="@gelenIlan.baslik" width="100" height="100" /></td>
+                    <td><a hhref="/Hesap/İlanDetay/@gelenIlan.id">@gelenIlan.baslik</a></td>
+
+                    <td>@gelenIlan.Kategori.ad</td>
+                    <td>@gelenIlan.fiyat TL</td>
+                    <td>
+                        Teklif Sıram : #@item.sirasi
+                        <br />
+                        @{
+                            Teklif teklif = gelenIlan.AcikArtirma.Teklif.OrderByDescending(x => x.teklif1).FirstOrDefault();
+                            if (DateTime.Now < gelenIlan.AcikArtirma.bitistarih)
+                            {
+                                TimeSpan kalanZaman = (DateTime)gelenIlan.AcikArtirma.bitistarih - DateTime.Now;
+                                <label style="color:darkgreen;">@(Math.Floor(kalanZaman.TotalDays)) Gün @(kalanZaman.Hours) Saat Sonra Bitecek</label>
+                                <br />
+                                if (teklif != null)
+                                {
+                                    Kullanici kullanici = (Kullanici)HttpContext.Current.Session["Kullanici"];
+                                    if (teklif.Kullanici.id == kullanici.id) //en yüksek teklif bensem
+                                    {
+                                        <label>En Yüksek Teklif : Ben (@(teklif.teklif1) TL)</label>
+                                        <h4>Teklifim İlk Sırada !</h4>
+                                    }
+                                    else
+                                    {
+                                        <label>En Yüksek Teklif : @(teklif.Kullanici.ad + " " + teklif.Kullanici.soyad) (@(teklif.teklif1)TL)</label>
+                                        <br />
+                                        <label>Benim Teklifim (@item.teklif.teklif1 TL), Sıram #@(@item.sirasi)</label>
+                                        // teklifimi güncellemek istersem
+                                        using (Html.BeginForm("TeklifYap", "AnaSayfa", FormMethod.Post, new { @class = "form-inline" }))
+                                        {
+                                            <h4>Teklifimi Güncelle</h4>
+                                            <input type="hidden" name="ilanid" value="@gelenIlan.id" />
+                                            <div class="form-group">
+                                                @Html.TextBox("tekliffiyat", "", new { @class = "form-control", placeholder = "Teklif Fiyatı", type = "number" })
+                                            </div>
+                                            <button type="submit" class="btn btn-success btn-md">Teklifimi Güncelle</button>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <label>Teklif Yapan Yok !</label>
+                                    <br />
+                                    <label>İlk Teklif Yapan Sen Ol !</label>
+                                    using (Html.BeginForm("TeklifYap", "AnaSayfa", FormMethod.Post, new { @class = "form-inline" }))
+                                    {
+                                        <h4>Teklif Ver</h4>
+                                        <input type="hidden" name="ilanid" value="@gelenIlan.id" />
+                                        <div class="form-group">
+                                            @Html.TextBox("tekliffiyat", "", new { @class = "form-control", placeholder = "Teklif Fiyatı", type = "number" })
+                                        </div>
+                                        <button type="submit" class="btn btn-success btn-md">Teklif Gönder</button>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                TimeSpan kalanZaman = DateTime.Now - (DateTime)gelenIlan.AcikArtirma.bitistarih;
+                                <label style="color:blue;">@(Math.Floor(kalanZaman.TotalDays)) Gün @(kalanZaman.Hours) Saat Önce Bitti</label>
+                                <br />
+                                Kullanici oturum_kullanici = (Kullanici)HttpContext.Current.Session["Kullanici"];
+                                if (teklif.Kullanici.id == oturum_kullanici.id) // ben Kazanmışsam
+                                {
+                                    <label>Kazanan : @(teklif.Kullanici.ad + " " + teklif.Kullanici.soyad) (Ben) (@(teklif.teklif1)TL)</label>
+                                    using (Html.BeginForm("AcikArtirmaKazandimMesajAt", "Hesap", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="ilan_id" value="@gelenIlan.id" />
+                                        <button type="submit" class="btn btn-success btn-md ">Kazandığını Bildirmek İçin Mesaj At</button>
+                                    }
+                                }
+                                else
+                                {
+                                    <label>Kazanan : @(teklif.Kullanici.ad + " " + teklif.Kullanici.soyad) (@(teklif.teklif1)TL)</label>
+                                }
+                            }
+                        }
+                    </td>
+                    <td> <a href="/Hesap/TeklifSil/@item.teklif.id" onclick="return confirm('Silmek istediğinizden emin misiniz ?')" class="btn btn-danger btn-md ">Teklifimi Sil</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<br />
+
+
+

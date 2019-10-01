@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Şifre Reset";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@model Kullanici
+<div class="container">
+    <div class="card card-container text-center">
+        <h2><strong>Al Abi Ver Abi</strong></h2>
+        <br />
+        @using (Html.BeginForm("SifreResetOnay", "Login", FormMethod.Post, new { @class = "form - signin" }))
+        {
+            @Html.Hidden("kulid",Model.id)
+            @Html.Password("sifre1", "", new { @class = "form-control", placeholder = "Şifre", type = "password", required = "", autofocus = "" })
+            <br />
+            @Html.Password("sifre2", "", new { @class = "form-control", placeholder = "Şifre Tekrar", type = "password", required = "", autofocus = "" })
+            <br />
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Şifre Değiştir</button>
+        }
+    </div>
+    <br />
+    @if (TempData["Mesaj"] != null && TempData["MesajTip"] != null)
+    {
+        <div class="alert alert-@TempData["MesajTip"]">
+            @TempData["Mesaj"]
+        </div>
+    }
+</div>

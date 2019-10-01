@@ -1,0 +1,147 @@
+﻿@model IEnumerable<AlAbiVerAbi.Kullanici>
+
+@{
+    ViewBag.Title = "Kullanıcılar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="row">
+
+    @using (Html.BeginForm("Kullanicilar", "Admin", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <div class="form-group" style="margin-right:15px;">
+            <input type="text" name="kelimeArama" class="form-control" placeholder="Kelime İle Ara" />
+        </div>
+        <button type="submit" class="btn btn-default">Ara</button>
+    }
+
+    <table class="table" style="margin-top:10px;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KullaniciResim.ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rol.adi)
+            </th>
+            <th>
+                @(Html.DisplayNameFor(model => model.ad) + " " + Html.DisplayNameFor(model => model.soyad))
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.olusturulmatarih)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.onaylimi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.engellimi)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (Kullanici item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.KullaniciResim != null)
+                    {
+                        <img src="~/Image/kullanici/@Html.DisplayFor(modelItem => item.KullaniciResim.ad)" width="100" height="100" alt="@(item.ad + " "+item.soyad)" />
+                    }
+                    else
+                    {
+                        <img src="~/Image/kullanici/bos.png" width="100" height="100" alt="@(item.ad + " "+item.soyad)" />
+                    }
+                </td>
+                <td>
+                    @if (item.Rol.adi == "Kullanici")
+                    {
+                        <strong>@Html.DisplayFor(modelItem => item.Rol.adi)</strong>
+                        using (Html.BeginForm("KullaniciRol", "Admin", FormMethod.Post))
+                        {
+                            <input type="hidden" name="kullanici_id" value="@item.id" />
+                            <input type="hidden" name="yeni_rol" value="Admin" />
+                            <button type="submit" class="btn btn-info btn-warning ">Admin Yap</button>
+                        }
+                    }
+                    else
+                    {
+                        <strong>@Html.DisplayFor(modelItem => item.Rol.adi)</strong>
+                        using (Html.BeginForm("KullaniciRol", "Admin", FormMethod.Post))
+                        {
+                            <input type="hidden" name="kullanici_id" value="@item.id" />
+                            <input type="hidden" name="yeni_rol" value="Kullanici" />
+                            <button type="submit" class="btn btn-info btn-md ">Kullanıcı Yap</button>
+                        }
+                    }
+                </td>
+                <td>
+                    @(item.ad + " " + item.soyad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.olusturulmatarih)
+                </td>
+                <td>
+
+                    <strong>@Html.DisplayFor(modelItem => item.onaylimi)</strong>
+                    @if ((bool)item.onaylimi)
+                    {
+                        using (Html.BeginForm("KullaniciOnay", "Admin", FormMethod.Post))
+                        {
+                            <input type="hidden" name="kullanici_id" value="@item.id" />
+                            <input type="hidden" name="onay" value="false" />
+                            <button type="submit" class="btn btn-warning btn-md ">Onayı Kaldır</button>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("KullaniciOnay", "Admin", FormMethod.Post))
+                        {
+                            <input type="hidden" name="kullanici_id" value="@item.id" />
+                            <input type="hidden" name="onay" value="true" />
+                            <button type="submit" class="btn btn-success btn-md ">Onayla</button>
+                        }
+                    }
+
+                </td>
+                <td>
+
+                    <strong>@Html.DisplayFor(modelItem => item.engellimi)</strong>
+                    @if ((bool)item.engellimi)
+                    {
+                        using (Html.BeginForm("KullaniciEngel", "Admin", FormMethod.Post))
+                        {
+                            <input type="hidden" name="kullanici_id" value="@item.id" />
+                            <input type="hidden" name="engel" value="false" />
+                            <button type="submit" class="btn btn-warning btn-md ">Engeli Kaldır</button>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("KullaniciEngel", "Admin", FormMethod.Post))
+                        {
+                            <input type="hidden" name="kullanici_id" value="@item.id" />
+                            <input type="hidden" name="engel" value="true" />
+                            <button type="submit" class="btn btn-danger btn-md">Kullanıcı Engelle</button>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("KullaniciDuzenle", "KullaniciDuzenle", new { id = item.id }, new { @class="btn btn-warning btn-xs"})
+                    @Html.ActionLink("KullaniciDetay", "KullaniciDetay", new { id = item.id }, new { @class = "btn btn-info btn-xs" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

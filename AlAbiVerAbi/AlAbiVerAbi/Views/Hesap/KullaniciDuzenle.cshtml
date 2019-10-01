@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+@model Kullanici
+
+<div class="row"><div class="col-md-12 text-center"><h2><i>Hesabımı Düzenle</i></h2></div></div>
+<br />
+
+<div class="row">
+
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+
+        @using (Html.BeginForm("KullaniciDuzenle", "Hesap", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.id)
+                @Html.HiddenFor(model => model.id, new { htmlAttributes = new { @class = "form-control"} })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ad)
+                @Html.EditorFor(model => model.ad, new { htmlAttributes = new { @class = "form-control", placeholder = "Adınız" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.soyad)
+                @Html.EditorFor(model => model.soyad, new { htmlAttributes = new { @class = "form-control", placeholder = "Soyadınız" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.sifre)
+                @Html.PasswordFor(model => model.sifre, new { @class = "form-control", placeholder = "Şifre" })
+            </div>
+            <div class="form-group">
+                <label>Sifre (Tekrar)</label>
+                <input type="password" class="form-control" id="sifre2" placeholder="Şifre (Tekrar)">
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.mail)
+                @Html.EditorFor(model => model.mail, new { htmlAttributes = new { @class = "form-control", placeholder = "E-Mail" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.telefon)
+                @Html.EditorFor(model => model.telefon, new { htmlAttributes = new { @class = "form-control", placeholder = "Telefon" } })
+            </div>
+
+            <div class="form-group thumbnail" style="padding-left:20px;padding-top:15px;">
+                <label>Var Olan Resim</label>
+                <img src="~/Image/kullanici/@((Model.KullaniciResim == null)?"bos.png":Model.KullaniciResim.ad)" width="200" height="200" />
+                <label>Resim Ekle</label><br>
+                <input type="file" name="gelenResim">
+                <p class="help-block">Var olan resmi değiştirmek istemiyorsanız, resim eklemeyiniz.</p>
+            </div>
+
+            <button type="submit" class="btn btn-info btn-lg">Düzenle</button>
+            <a class="btn btn-danger btn-lg pull-right" href="/Hesap/Index" role="button">İptal</a>
+            @Html.ValidationSummary()
+        }
+
+    </div>
+    <br />
+    <br />
+
+</div>
+

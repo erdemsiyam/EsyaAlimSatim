@@ -1,0 +1,141 @@
+﻿@model AlAbiVerAbi.ilan
+
+@{
+    Layout = "~/Views/Shared/_HesapLayout.cshtml";
+}
+
+<div class="row"><div class="col-md-12 text-center"><h2><i>İlan Ekle</i></h2></div></div>
+<br />
+<div class="row">
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        @using (Html.BeginForm("İlanEkle", "Hesap", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.baslik)
+                @Html.EditorFor(model => model.baslik, new { htmlAttributes = new { @class = "form-control" }, placeholder = "Başlık" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.kategori_id)
+                @Html.DropDownList("kategori_id", (SelectList)ViewBag.Kategoriler, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.aciklama)
+                @Html.TextAreaFor(model => model.aciklama, new { htmlAttributes = new { @class = "form-control" }, placeholder = "Açıklama" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.sorunu)
+                @Html.TextAreaFor(model => model.sorunu, new { htmlAttributes = new { @class = "form-control" }, placeholder = "Sorunu" })
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.kullanimsuresi)
+                @Html.EditorFor(model => model.kullanimsuresi, new { htmlAttributes = new { @class = "form-control" }, placeholder = "Kullanım Süresi (Gün)" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.fiyat)
+                @Html.EditorFor(model => model.fiyat, new { htmlAttributes = new { @class = "form-control" }, placeholder = "Fiyat", type = "number" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.il)
+                @Html.DropDownListFor(m => m.il, (SelectList)ViewBag.İller, "Şehir Seçiniz", new { @class = "form-control dropdown" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ilce)
+                @Html.DropDownListFor(m => m.ilce, (SelectList)ViewBag.İlçeler, null, new { @class = "form-control dropdown" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.mahalle)
+                @Html.DropDownListFor(m => m.mahalle, (SelectList)ViewBag.Mahalleler, null, new { @class = "form-control dropdown" })
+            </div>
+            <div class="form-group thumbnail" style="padding-left:20px;padding-top:15px;">
+                <label>Resim Ekle</label><br />
+                <input type="file" name="gelenResim[0]" /><br />
+                <input type="file" name="gelenResim[1]" /><br />
+                <input type="file" name="gelenResim[2]" />
+                <p class="help-block">En az 1 En fazla 3 resim eklenebilir.</p>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg">İlanı Ekle</button>
+            <a class="btn btn-danger btn-lg pull-right" href="/Hesap/Index" role="button">İptal</a>
+            @Html.ValidationSummary()
+        }
+    </div>
+
+</div>
+<br />
+<br />
+
+
+<script>
+
+    $("#il").change(function () {
+
+            var ddlCountry = $(this); // ülke dropdownlist'i elimize aldık
+            var il_id = ddlCountry.val(); // seçilen ülke id'sini aldık
+
+        if (il_id != "0" || il_id != "-1") // eğer ülke id' değeri -1 den farklıysa(seçilmemiş), 0 'dan farklıysa (Lütfen seçiniz optionu) , kişi bir ülke seçmiş demektir, ozaman işlemi yaparız
+            {
+            $("#ilce option").not(":first").remove(); // ülke dropdownlist'in ilk elemanı hariç hepsini sil. ilk elemanı = lütfen seçiniz yazısıdır.
+            $("#mahalle option").not(":first").remove(); // ülke dropdownlist'in ilk elemanı hariç hepsini sil. ilk elemanı = lütfen seçiniz yazısıdır.
+                $.ajax({ // ajax ile asenkron sunucu isteği yaparız
+                    method: "GET", // tip get
+                    url: '@Url.Action("Get_ilce", "Hesap")' + '/' + il_id // url'yi Home/GetCitiesByCountry/id : olarak yaparız. seçilen ülkeye göre şehir getirtiriz.
+                }).done( // başarılı olduğunda
+                    function (result) { // result = geri gelen değer
+
+                        var ddlCity = $("#ilce"); // şehir dropdownlist'i elimize alırız
+
+                        for (var i = 0; i < result.length; i++) { // gelen değerde kaç satır veri varsa okadar döneriz.
+                            var cityName = result[i].Ad; // sıradaki verinin şehrin adını
+                            var cityId = result[i].id; // şehrin id'sini alırız
+                            var opt = $("<option></option>"); // option öğesi oluşturur, aşağıda da buna özellik veririz.
+
+                            opt.text(cityName); // option'un text'ine şehrin ismini ver
+                            opt.attr("value", cityId); // value özelliğine şehrin id'sini ver.
+                            //opt.val(cityId); // şehrin id'si böyle de verilebilirdi.
+
+                            ddlCity.append(opt); // şehir dropdownlist'ine bu şehri ekle. sonuna ekle.
+                        }
+
+                    })
+            }
+
+    });
+    $("#ilce").change(function () {
+
+            var ddlCountry = $(this); // ülke dropdownlist'i elimize aldık
+            var il_id = ddlCountry.val(); // seçilen ülke id'sini aldık
+
+        if (il_id != "0" || il_id != "-1") // eğer ülke id' değeri -1 den farklıysa(seçilmemiş), 0 'dan farklıysa (Lütfen seçiniz optionu) , kişi bir ülke seçmiş demektir, ozaman işlemi yaparız
+            {
+            $("#mahalle option").not(":first").remove(); // ülke dropdownlist'in ilk elemanı hariç hepsini sil. ilk elemanı = lütfen seçiniz yazısıdır.
+
+                $.ajax({ // ajax ile asenkron sunucu isteği yaparız
+                    method: "GET", // tip get
+                    url: '@Url.Action("Get_Mahalle", "Hesap")' + '/' + il_id // url'yi Home/GetCitiesByCountry/id : olarak yaparız. seçilen ülkeye göre şehir getirtiriz.
+                }).done( // başarılı olduğunda
+                    function (result) { // result = geri gelen değer
+
+                        var ddlCity = $("#mahalle"); // şehir dropdownlist'i elimize alırız
+
+                        for (var i = 0; i < result.length; i++) { // gelen değerde kaç satır veri varsa okadar döneriz.
+                            var cityName = result[i].Ad; // sıradaki verinin şehrin adını
+                            var cityId = result[i].id; // şehrin id'sini alırız
+                            var opt = $("<option></option>"); // option öğesi oluşturur, aşağıda da buna özellik veririz.
+
+                            opt.text(cityName); // option'un text'ine şehrin ismini ver
+                            opt.attr("value", cityId); // value özelliğine şehrin id'sini ver.
+                            //opt.val(cityId); // şehrin id'si böyle de verilebilirdi.
+
+                            ddlCity.append(opt); // şehir dropdownlist'ine bu şehri ekle. sonuna ekle.
+                        }
+
+                    })
+            }
+
+        });
+
+</script>
