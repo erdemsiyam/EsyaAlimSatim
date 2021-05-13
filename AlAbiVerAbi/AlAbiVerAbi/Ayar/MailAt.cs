@@ -9,8 +9,8 @@ namespace AlAbiVerAbi
 {
     public static class MailAt
     {
-        private const string MAIL = "erdemsiyam@gmail.com";
-        private const string PASS = "komut81ai";
+        private const string MAIL = "xxx@xxx.com";
+        private const string PASS = "xxx";
 
         private static bool mailGonder(string hedefMailAdres, string icerik , string baslik)
         {
